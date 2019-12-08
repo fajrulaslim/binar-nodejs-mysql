@@ -86,6 +86,30 @@ exports.ubah_pengguna = function (req, res, next) {
     })
 }
 
+// PASSWORD
+exports.password = function (req, res, next) {
+    let id = req.params.id
+    res.render('password', {
+        title: 'Ubah Password Pengguna',
+        id: id
+    });
+};
+
+exports.password_pengguna = function (req, res, next) {
+    let id = req.body.id;
+    let data = {
+        password: bcrypt.hashSync(req.body.password1, salt),
+    };
+
+    db.query('UPDATE db_user SET ? WHERE id = ' + id, data, function (err, result) {
+        if (err) {
+            res.redirect('/index?message=Password gagal diubah!');
+        } else {
+            res.redirect('/index?message=Password berhasil diubah!');
+        }
+    })
+}
+
 // HAPUS
 exports.hapus = function (req, res, next) {
     let id = req.params.id;
