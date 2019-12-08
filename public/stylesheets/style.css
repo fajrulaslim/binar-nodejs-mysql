@@ -1,0 +1,35 @@
+body {
+    font-family: 'Montserrat';
+}
+
+.nav-item {
+    margin-left: 10px;
+}
+
+/* carousel */
+.carousel {
+    height: 400px;
+}
+
+/* code */
+
+/* Feature */
+
+.feature p, .team p, footer p, .category-class p {
+    font-weight: 200;
+    color: #B7B7B7;
+}
+
+.figure h5 {
+    color: #171717;
+}
+
+/* login and register */
+.p-10 {
+    padding: 70px 70px;
+}
+
+.pt-10 {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}

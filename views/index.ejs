@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+<%- include('partials/navigation') %>
+
+<section class="mt-5 mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1><%= title %></h1>
+        <a href="/tambah" class="btn btn-primary btn-sm">Tambah Pengguna</a>
+        <br>
+        <% if(message){ %>
+        <div class="alert alert-primary mt-3" role="alert">
+          <%= message %>
+        </div>
+        <% } %>
+        <table class="table table-striped table-hover mt-4">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nama</th>
+              <th scope="col">Jabatan</th>
+              <th scope="col">Divisi</th>
+              <th scope="col">Username</th>
+              <th scope="col">Alamat</th>
+              <th scope="col">Tindakan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% let a = 1; %>
+            <% data.forEach(function(val){ %>
+            <tr>
+              <th scope="row"><%= a %></th>
+              <td class="text-uppercase"><%= val.nama %></td>
+              <td><%= val.jabatan %></td>
+              <td><%= val.divisi %></td>
+              <td><%= val.userid %></td>
+              <td><%= val.alamat %></td>
+              <td>
+                <a class="btn btn-sm btn-outline-success" href="/lihat/<%= val.id %>">Lihat</a>
+                <a class="btn btn-sm btn-outline-warning" href="/ubah/<%= val.id %>">Ubah</a>
+                <a class="btn btn-sm btn-outline-danger" href="/hapus/<%= val.id %>"
+                  onclick="return confirm('Apa kamu yakin?');">Hapus</a>
+              </td>
+            </tr>
+            <% a++; %>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

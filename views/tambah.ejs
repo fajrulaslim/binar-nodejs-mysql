@@ -1,0 +1,108 @@
+<%- include('partials/header') %>
+<%- include('partials/navigation') %>
+
+<section class="mt-5 mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1><%= title %></h1>
+                <form action="/tambah_pengguna" method="post" class="mt-5">
+                    <div class="form-group row">
+                        <label for="nama" class="col-sm-2 col-form-label">Nama Lengkap</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="nama" class="form-control text-uppercase" id="nama" maxlength="35"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="jabatan" class="form-control" id="jabatan" maxlength="20" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="divisi" class="col-sm-2 col-form-label">Divisi</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="divisi" name="divisi" required>
+                                <option value="" selected disabled></option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Developer">Developer</option>
+                                <option value="Sales">Sales</option>
+                                <option value="HR">HR</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <input type="hidden" name="userid" class="form-control" id="userid">
+                        <label for="userid2" class="col-sm-2 col-form-label">User ID</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="userid2" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="password1" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="password1" class="form-control" id="password1" minlength="8"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="password2" class="col-sm-2 col-form-label">Konfirmasi Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="password2" class="form-control" id="password2" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                        <div class="col-sm-10">
+                            <textarea name="alamat" id="alamat" cols="30" rows="7" class="form-control" maxlength="200"
+                                required></textarea>
+                        </div>
+                    </div>
+                    <input type="hidden" id="tanggal" name="tanggal">
+                    <div class="form-group row justify-content-end">
+                        <div class="col-sm-10 ">
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <a href="/" class="btn btn-outline-secondary">Kembali</a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // tanggal
+    document.getElementById("tanggal").value = Date.now();
+
+    // userid
+    function makeid(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+    document.getElementById("userid").value = makeid(15);
+    document.getElementById("userid2").value = document.getElementById("userid").value;
+
+    // password
+    let password1 = document.getElementById("password1");
+    let password2 = document.getElementById("password2");
+
+    function validatePassword() {
+        if (password1.value != password2.value) {
+            password2.setCustomValidity("Passwords Don't Match");
+        } else {
+            password2.setCustomValidity('');
+        }
+    }
+    password1.onchange = validatePassword;
+    password2.onkeyup = validatePassword;
+</script>
+
+<%- include('partials/footer') %>

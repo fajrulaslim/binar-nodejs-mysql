@@ -1,0 +1,70 @@
+<%- include('partials/header') %>
+<%- include('partials/navigation') %>
+
+<section class="mt-5 mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1><%= title %></h1>
+                <form class="mt-5" action="/ubah_pengguna" method="post">
+                    <div class="form-group row">
+                        <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="nama" class="form-control text-uppercase" id="nama" maxlength="35"
+                                value="<%= data.nama %>" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="jabatan" class="form-control" id="jabatan" maxlength="20"
+                                value="<%= data.jabatan %>" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="divisi" class="col-sm-2 col-form-label">Divisi</label>
+                        <div class="col-sm-10">
+                            <% let d = ['Marketing', 'Developer', 'Sales', 'HR'] %>
+                            <select class="form-control" id="divisi" name="divisi" required>
+                                <% for(let i = 0; i < d.length; i++){ %>
+                                <% if(d[i] == data.divisi){ %>
+                                <option value="<%= d[i] %>" selected><%= d[i] %></option>
+                                <% } else { %>
+                                <option value="<%= d[i] %>"><%= d[i] %></option>
+                                <% } %>
+                                <% } %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="userid" class="col-sm-2 col-form-label">User Id</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" value="<%= data.userid %>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                        <div class="col-sm-10">
+                            <textarea name="alamat" id="alamat" cols="30" rows="7" class="form-control" maxlength="200"
+                                required><%= data.alamat %></textarea>
+                        </div>
+                    </div>
+                    <input type="hidden" id="id" name="id" value="<%= data.id %>">
+                    <input type="hidden" id="tanggal" name="tanggal">
+                    <div class="form-group row justify-content-end">
+                        <div class="col-sm-10 ">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <a href="/" class="btn btn-outline-secondary">Kembali</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.getElementById("tanggal").value = Date.now();
+</script>
+
+<%- include('partials/footer') %>
